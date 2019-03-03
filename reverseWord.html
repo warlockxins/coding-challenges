@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Reverse words
+        </title>
+    </head>
+    <body>
+        <h2>Reverse word letters in sentence</h2>
+
+        <p id="input"></p>
+
+        <p>this test showed me how little things mess me up</p>
+
+        <p id="result"></p>
+
+        <script>
+            // var input = ["a", "b"];
+            var input = [
+                "I",
+                " ",
+                "e",
+                "v",
+                "o",
+                "l",
+                " ",
+                "m",
+                "y",
+                " ",
+                "w",
+                "i",
+                "f",
+                "e"
+            ];
+            document.getElementById("input").innerHTML = input;
+
+            reverseWords(input);
+            document.getElementById("result").innerHTML = input;
+
+            function reverseSingleWord(wordChars, startIdx, endIdx) {
+                var count = endIdx - startIdx;
+                if (count == 0) {
+                    return;
+                }
+
+                var last = 0,
+                    offset = 0;
+                for (var i = startIdx; i < endIdx; i++) {
+                    offset = startIdx + count;
+                    if (i === offset) {
+                        break;
+                    }
+                    last = wordChars[offset];
+                    wordChars[offset] = wordChars[i];
+                    wordChars[i] = last;
+                    count--;
+                }
+            }
+            function reverseWords(wordChars) {
+                var start = 0;
+                //lets assume that no double space madness is happening
+                for (i = 0; i < wordChars.length; i++) {
+                    if (wordChars[i] === " ") {
+                        reverseSingleWord(wordChars, start, i - 1);
+                        start = i + 1;
+                    }
+                }
+                reverseSingleWord(wordChars, start, wordChars.length - 1);
+            }
+        </script>
+    </body>
+</html>
