@@ -1,0 +1,49 @@
+<!-- Good morning! Here's your coding interview problem for today.
+
+This problem was asked by Uber.
+
+Given an array of integers, return a new array such that each element at index i of the new array is the product of all the numbers in the original array except the one at i.
+
+For example, if our input was [1, 2, 3, 4, 5], the expected output would be [120, 60, 40, 30, 24]. If our input was [3, 2, 1], the expected output would be [2, 3, 6].
+ -->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Task from Uber
+        </title>
+    </head>
+    <body>
+        <h2>Uber Coding challenge</h2>
+
+        <p id="input"></p>
+
+        <p id="result"></p>
+
+        <script>
+            var input = [3, 2, 1];
+            // var input = [1, 2, 3, 4, 5];
+            document.getElementById("input").innerHTML = input;
+
+            document.getElementById("result").innerHTML = getArray(input);
+
+            function getArray(input) {
+                var result = [];
+                var mult = 1;
+                for (let index = 0; index < input.length; index++) {
+                    mult = 1;
+                    input.forEach((elementInner, index2) => {
+                        if (index !== index2) {
+                            mult *= elementInner;
+                        }
+                    });
+
+                    result.push(mult);
+                }
+
+                return result;
+            }
+        </script>
+    </body>
+</html>
