@@ -1,0 +1,87 @@
+{
+    "widgets": [
+        {
+            "id": 1,
+            "name": "Some Corporation",
+            "type": "form",
+            "items": [
+                {
+                    "type": "section",
+                    "header": "Opportunity details",
+                    "columns": 2,
+                    "items": [
+                        {
+                            "type": "input",
+                            "label": "Opportunity name",
+                            "value": "Acme - 1200 Widgets (Sample)",
+                            "required": true
+                        },
+                        {
+                            "type": "currency",
+                            "label": "Ammount + currency",
+                            "value": 146,
+                            "symbol": "EUR"
+                        },
+                        {
+                            "type": "currency",
+                            "label": "Another input",
+                            "value": 140000,
+                            "symbol": "EUR",
+                            "precision": 2
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "name": "Alex Corporation 2",
+            "type": "form",
+            "items": [
+                {
+                    "type": "section",
+                    "header": "Keeping stuff simpler",
+                    "columns": 4,
+                    "items": [
+                        {
+                            "type": "input",
+                            "label": "Some other name1",
+                            "value": "Some other value",
+                            "required": true
+                        },
+                        {
+                            "type": "input",
+                            "label": "Some other name 2",
+                            "value": "Some other value 2",
+                            "required": true
+                        },
+                        {
+                            "type": "input",
+                            "label": "Some other name 3",
+                            "value": "Some other value 3",
+                            "required": true
+                        },
+                        {
+                            "type": "input",
+                            "label": "Some other name 4",
+                            "value": "Some other value 4",
+                            "required": true
+                        },
+                        {
+                            "type": "input",
+                            "label": "Some other name 5",
+                            "value": "Some other value 5",
+                            "required": true
+                        },
+                        {
+                            "type": "input",
+                            "label": "Opportunity name",
+                            "value": "Acme - 1200 Widgets (Sample)",
+                            "required": true
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
