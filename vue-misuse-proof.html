@@ -1,0 +1,111 @@
+<!--
+Prove that vue getters/compute method can be misused
+ -->
+
+ <!DOCTYPE html>
+ <html>
+     <head>
+         <title>
+            Obusing Vue
+         </title>
+         <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+         <script src="https://unpkg.com/vuex@2.0.0"></script>
+     </head>
+     <body>
+        <h2>Obusing Vue</h2>
+        
+        <div id="app">
+            <button v-on:click="incorrect">Incorrect method</button>
+            <button v-on:click="correct">Correct method</button><br>
+            has 90 in array = {{hasNr90}}, {{countMessage}}, store array length = {{arrayStore.length}}
+            <ul>
+                <li v-for="item in resultArray">
+                    your {{item}}
+                </li>
+            </ul>
+        </div>
+ 
+        <script>
+            var store = new Vuex.Store({
+                state: {
+                    array: []
+                },
+                mutations: {
+                    increment (state) {
+                        state.array.push("some");
+                    }
+                },
+                actions: {
+                    incorrect(context) {
+
+                    },
+                    correct() {
+                        
+                    }
+                }
+            })
+            var simpleCounter = 0;
+            var storeTemp = [];
+            for (var i = 0; i < 100; i++) {
+                storeTemp.push(i);
+            }
+            console.log(storeTemp.length);
+
+            var app = new Vue({
+                el: '#app',
+                store: store,
+                computed: {
+                    arrayStore: function() {
+                        return this.$store.state.array;
+                    }, 
+                    countMessage: function() {
+                        simpleCounter++;
+                        console.log(simpleCounter);
+                        return "count is " + this.resultArray.length;
+                    },
+                    hasNr90: function() {
+                        console.log(simpleCounter);
+                        return this.resultArray.find(function(item) {
+                            simpleCounter++;
+                            return item.value === 90;
+                        });
+                    },
+
+                    messageForCount: function() {
+                        simpleCounter++;
+                        console.log(simpleCounter);
+                        if (this.hasNr90) {
+                            return "you have 90th element";
+                        }
+
+                        return "you don't have 90th element";
+                    }
+
+                },
+                data: {
+                    message: 'Hello Vue!',
+                    resultArray: [],
+                },
+                methods: {
+                    incorrect: function() {
+                        var self = this;
+                        new Promise(function(resolve, reject) {
+                            for (var i = 0; i < storeTemp.length; i ++) {
+                                new Promise(function(resolve2, reject2) {
+                                    self.resultArray.push({id: i, value: storeTemp[i]});
+                                });
+                            }
+                        });
+
+                       this.message = "hi there";
+                       this.$store.commit('increment')
+                    },
+                    correct: function() {
+                       this.message = "hi there correct"; 
+                    }
+                },
+            })
+        </script>
+     </body>
+ </html>
+ 
