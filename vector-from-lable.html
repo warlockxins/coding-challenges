@@ -1,0 +1,78 @@
+<!--
+given you have a list of strings/labels generate vectors compatible with machine learnig
+ -->
+
+ <!DOCTYPE html>
+ <html>
+     <head>
+         <title>
+            Obusing Vue
+         </title>
+         <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+         <script src="https://unpkg.com/vuex@2.0.0"></script>
+     </head>
+     <body>
+        <h2>labels to vector</h2>
+        
+        <div id="app">
+            <input type="text" v-model="inputLabel"/>
+            <button v-on:click="add">add</button>
+            <br>
+            <ul>
+                <li v-for="(item, index) in labelArray">
+                    <a href="#" v-on:click.prevent="labelArray.splice(index, 1)">(X)</a>
+                    {{item}} {{vectors[item]}}
+                    <a href="#" v-on:click.prevent="compose(item)">pass to array</a>
+                </li>
+            </ul>
+
+            {{composedArray}}
+        </div>
+ 
+        <script>
+            
+            var app = new Vue({
+                el: '#app',
+                computed: {
+                    vectors() {
+                        var result = {};
+                        var arr;
+                        var self = this;
+                        this.labelArray.forEach(function(item) {
+                            arr = Array(self.labelArray.length).fill(0);
+                            arr[self.labelArray.indexOf(item)] = 1;
+                            result[item] = arr;
+                        });
+                        return result;
+                    }
+                },
+                data: {
+                    inputLabel: "",
+                    composedArray: [],
+                    arrayStart: ["a", "b", "c"],
+                    arrayEnd: ["d", "e", "f"],
+                    labelArray: [
+                        'cat',
+                        'dog',
+                        'horse',
+                        'sheep',
+                        'goat'
+                    ],
+
+                },
+                methods: {
+                    add() {
+                        if (this.labelArray.indexOf(this.inputLabel) === -1) {
+                            this.labelArray.push(this.inputLabel);
+                            this.inputLabel = "";
+                        }
+                    },
+                    compose(item) {
+                        this.composedArray = [].concat(this.arrayStart).concat(this.vectors[item]).concat(this.arrayEnd);
+                    }
+                },
+            })
+        </script>
+     </body>
+ </html>
+ 
